@@ -70,14 +70,15 @@ else . end
   else . end
 | .components.schemas |= walk(if type == "object" and (.enum? | type == "array") then del(.enum) else . end)
 
-# An answer's object may gain a member within its version, which the SDK carries through rather than
-# drops, as the same rule asks. openapi-generator 7.17.0 reads a schema that doesn't say whether it
-# takes members it doesn't name as one that takes none, and gives its model no place for them, so
-# each object of the answers that doesn't say says it does, as OpenAPI reads it. With those marks,
-# the generator gives a request body's model a place for them too where its schema says it takes
-# none, and none where its schema doesn't say: so a request body's schema doesn't say, and its model
-# sends the members it names alone, as the API takes them. A request body that takes others, or an
-# object the step can't find by its type, stops it.
+# An answer's object may gain a member within its version, which the same rule asks a client to
+# carry through. openapi-generator 7.17.0 reads a schema that doesn't say whether it takes members
+# it doesn't name as one that takes none, so each object of the answers that doesn't say says it
+# does, as OpenAPI reads it, for a generator that gives a model a place for them. Such a generator
+# gives a request body's model a place too where its schema says it takes none, and none where its
+# schema doesn't say: so a request body's schema doesn't say, and its model sends the members it
+# names alone, as the API takes them. The generator this SDK is made with gives a model no place for
+# them, whatever the marks say, so the SDK leaves such a member out of its model, as the README
+# says. A request body that takes others, or an object the step can't find by its type, stops it.
 | [$bodies[] | .content["application/json"].schema."$ref" | ltrimstr("#/components/schemas/")] as $requests
 | if [.components.schemas[$requests[]] | .additionalProperties | select(. != false and . != null)] != [] then
     error("a schema a request body names takes members it doesn't name: see how the SDK should send them before generating it")
