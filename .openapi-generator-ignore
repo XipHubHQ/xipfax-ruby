@@ -1,0 +1,15 @@
+# What openapi-generator would write that the repository keeps as its own or doesn't keep: the
+# README, the gemspec, the Gemfile and .gitignore are the repository's own, and the generator's
+# Rakefile, style and test settings, CI files, push script, docs and specs aren't kept.
+README.md
+xipfax-sdk.gemspec
+Gemfile
+.gitignore
+Rakefile
+.rspec
+.rubocop.yml
+.travis.yml
+.gitlab-ci.yml
+git_push.sh
+docs/**
+spec/**
