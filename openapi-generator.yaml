@@ -1,0 +1,29 @@
+# openapi-generator 7.17.0's settings for the SDK, which scripts/generate.sh passes it with the
+# document scripts/sdk-document.jq writes. The client is Faraday's. What RubyGems publishes, the
+# gem's authors, its license, its links and what it requires, is xipfax-sdk.gemspec's alone: the
+# generator writes those only into files the repository doesn't keep.
+library: faraday
+# The gem's name, which is its entry's, lib/xipfax-sdk.rb, and its folder's under lib/: the
+# gemspec publishes the gem under it, which scripts/build.rb holds it to.
+gemName: xipfax-sdk
+# The module that holds the SDK.
+moduleName: XipFax
+# The SDK's version, which the generator writes as XipFax::VERSION, the version the gemspec
+# publishes, and into the user agent each request names: scripts/gates.sh holds httpUserAgent to it,
+# so each release names it in both, and its tag.
+gemVersion: 0.1.0
+httpUserAgent: xipfax-ruby/0.1.0
+hideGenerationTimestamp: true
+globalProperties:
+  apiTests: 'false'
+  modelTests: 'false'
+  apiDocs: 'false'
+  modelDocs: 'false'
+# The generator's own ApiError is what a refusal raises: the API's refusal, the body it carries, is
+# ApiErrorBody.
+modelNameMappings:
+  Error: ApiErrorBody
+inlineSchemaNameMappings:
+  Error_error: ApiErrorObject
+  Error_error_details_inner: ApiErrorDetail
+  Office_sources_inner: OfficeSource
