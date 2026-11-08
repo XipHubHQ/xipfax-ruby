@@ -108,7 +108,7 @@ require 'faraday'
 
 pdf = File.binread('letter.pdf')
 added = client.draft.add_document(add_key, XipFax::NewDocument.new(name: 'letter.pdf', size_bytes: pdf.bytesize))
-upload = added.upload or raise 'No link to upload to: the request was sent again with its key.'
+upload = added.upload or raise 'No link to upload to: the document is ready or removed.'
 # A connection of its own: the link carries its own signature, and your key goes to XipFax alone.
 response = Faraday.put(upload.url, pdf, upload.headers)
 raise "The upload failed: #{response.status}" unless response.success?
@@ -126,11 +126,11 @@ again with the same key within 24 hours, the request is answered as it was the f
 than done twice, so a retry after a timeout can't send a fax twice. The SDK makes up no key itself:
 one it made would be new on each try, and protect nothing.
 
-The answer to a request sent again keeps none of its signed links, nor an endpoint's secret:
-`upload`, a document's `url` and an endpoint's `secret` come back nil. So an upload that
-`add_document` gave, asked for again with its key, has no link to send the bytes to. Take that
-document out with `remove_document`, and add it again with a new key. An endpoint whose first answer
-you lost has no secret to check its deliveries by: remove it with `remove_webhook_endpoint`, and
+The answer to a request sent again keeps none of its signed links, nor an endpoint's secret: a
+document's `url` and an endpoint's `secret` come back nil. `upload` is signed again instead while
+its document is still uploading: asked for again with its key, `add_document` gives a fresh link to
+send the bytes to, and nil once the document is ready or removed. An endpoint whose first answer you
+lost has no secret to check its deliveries by: remove it with `remove_webhook_endpoint`, and
 register it again with a new key.
 
 ## Webhooks
