@@ -5,14 +5,6 @@ number or a government office, and follow each fax until it's delivered. The SDK
 the API's own document, so its methods and types are the API's. It needs Ruby 2.7 or later, and
 sends its requests with Faraday.
 
-## Install
-
-```sh
-gem install xipfax-sdk
-```
-
-Or, in your Gemfile, `gem 'xipfax-sdk'`.
-
 ## Make an API key
 
 Sign in to the [developer console](https://developer.xipfax.com/console/), open API keys and make a
@@ -170,10 +162,6 @@ adds to the entry. To update the SDK, copy the new document over `openapi.json`,
 document generates, that every file reads, that the gem builds and that every file loads;
 `scripts/test.sh` runs the specs. Both run Ruby in Docker, by `scripts/docker.sh`, on what
 `scripts/fetch.sh` fetched.
-
-## Help
-
-Write to [help@xipfax.com](mailto:help@xipfax.com).
 
 ## License
 
