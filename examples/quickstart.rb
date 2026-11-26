@@ -25,8 +25,9 @@ class Quickstart
 
   # What the step that sends says first, as the docs' quickstart says it.
   REAL_AND_CHARGED = 'This step sends a real fax, and it’s charged. It goes to the number you name, so name one ' \
-                     'of your own. Its pages count on your plan, or where you have no plan its price is held on ' \
-                     'the card you saved, and taken once it’s delivered. A fax that fails costs nothing.'
+                     'of your own. Its pages count on your plan where it covers the number, or where you have ' \
+                     'no plan its price is held on the card you saved, and taken once it’s delivered. A fax ' \
+                     'that fails costs nothing.'
 
   # @param client [XipFax::Client] the client that sends each request
   # @param to [String] a fax number of yours, where the fax goes; without it, only the free steps run
@@ -92,7 +93,8 @@ class Quickstart
   # 2. Where a form goes: the offices that take Form 2848 from Ohio, and their numbers. Also free.
   def take_the_free_steps
     quote = @client.quote.get_quote(1)
-    say("A one-page fax costs #{quote.price_shown} without a plan: #{quote.terms}")
+    say("A one-page fax to a number in the US, its territories or Canada costs #{quote.price_shown} " \
+        "without a plan: #{quote.terms}")
 
     @client.offices.list_offices(search: 'Form 2848', place: 'OH', limit: 3).data.each do |office|
       say("#{office.name} takes Form 2848 at #{office.fax_number}.")

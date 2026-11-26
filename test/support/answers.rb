@@ -6,7 +6,7 @@ module XipFaxSpecs
   # The API's answers the specs are given, in JSON, each as the document gives it.
   module Answers
     # GET /quote's answer for a fax of one page.
-    QUOTE = '{"pages":1,"price":{"amount_minor":100,"currency":"USD"},"price_shown":"$1.00","terms":"The stand-in’s terms.","price_list":"stand-in"}'
+    QUOTE = '{"pages":1,"price":{"amount_minor":100,"currency":"USD"},"plan_covers":false,"price_shown":"$1.00","terms":"The stand-in’s terms.","price_list":"stand-in"}'
 
     # An office of GET /offices, which takes Form 2848 from Ohio.
     OFFICE = '{"id":"stand-in-office","name":"A stand-in office","fax_number":"+12025550143","fax_number_from_abroad":null,"applies_to":["Ohio"],"takes":["Form 2848"],"signed_in_ink":false,"confidential_cover":false,"sources":[{"title":"A stand-in page","url":"https://example.com/office"}],"checked_on":"2026-11-01"}'

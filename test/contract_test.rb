@@ -22,6 +22,9 @@ class ContractTest < Minitest::Test
   # One call of each operation, by its operation id, with arguments the document takes.
   CALLS = {
     'getQuote' => ->(client) { client.quote.get_quote(3) },
+    'quoteNumber' => lambda do |client|
+      client.quote.quote_number(XipFax::QuoteBody.new(pages: 3, to_number: '+44 20 7946 0958'))
+    end,
     'getDraft' => ->(client) { client.draft.get_draft },
     'addDocument' => lambda do |client|
       client.draft.add_document(
@@ -54,6 +57,7 @@ class ContractTest < Minitest::Test
   # that answer 204.
   ANSWERS = {
     'getQuote' => XipFaxSpecs::Answers::QUOTE,
+    'quoteNumber' => XipFaxSpecs::Answers::QUOTE,
     'getDraft' => '{"id":"fax_1","documents":[]}',
     'addDocument' => %({"document":#{XipFaxSpecs::Answers.document('doc_1', 'letter.pdf')},"upload":null}),
     'completeDocument' => XipFaxSpecs::Answers.document('doc_1', 'letter.pdf'),

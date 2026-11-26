@@ -31,6 +31,7 @@ lib/xipfax-sdk/models/plan_answer.rb
 lib/xipfax-sdk/models/plan_number.rb
 lib/xipfax-sdk/models/plan_pages.rb
 lib/xipfax-sdk/models/quote.rb
+lib/xipfax-sdk/models/quote_body.rb
 lib/xipfax-sdk/models/quote_price.rb
 lib/xipfax-sdk/models/send_draft.rb
 lib/xipfax-sdk/models/sent.rb
