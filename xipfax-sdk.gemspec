@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # What RubyGems publishes: the gem xipfax-sdk at the version openapi-generator.yaml gives
-# XipFax::VERSION, its author and contact, its license and links, the SDK's files, and the gems the
+# XipFax::VERSION, its author, its license and links, the SDK's files, and the gems the
 # generated client requires, at the versions it takes. scripts/build.rb holds its name and its
 # version to the settings, and builds it.
 require_relative 'lib/xipfax-sdk/version'
@@ -13,7 +13,6 @@ Gem::Specification.new do |spec|
   spec.description = 'Send faxes from your code with XipFax: quote a fax, add your PDFs, send them ' \
                      'to a number or a government office, and follow each fax until it is delivered.'
   spec.authors = ['XipFax']
-  spec.email = ['help@xipfax.com']
   spec.homepage = 'https://xipfax.com'
   spec.license = 'MIT'
   spec.metadata = {

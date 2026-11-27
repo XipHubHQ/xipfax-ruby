@@ -68,16 +68,18 @@ XIPFAX_TO='+1 202 555 0143' XIPFAX_PDF_URL=https://example.com/letter.pdf \
   XIPFAX_API_KEY=xipfax_key_live_… bundle exec ruby examples/quickstart.rb
 ```
 
-**That step sends a real fax, and it's charged.** Its pages count on your plan, or where you have no
-plan its price is held on the card you saved, and taken once it's delivered. A fax that fails costs
-nothing. The quickstart says so before it sends, and sends only once you type `send`. Then it
-follows the fax until it's delivered, and gives the link to its confirmation.
+**That step sends a real fax, and it's charged.** Its pages count on your plan where it covers the
+number, or where you have no plan its price is held on the card you saved, and taken once it's
+delivered. A fax that fails costs nothing. The quickstart says so before it sends, and sends only
+once you type `send`. Then it follows the fax until it's delivered, and gives the link to its
+confirmation.
 
 ## Methods
 
 | Method                                                                               | Request                                        | What it does                                                                         |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `quote.get_quote(pages)`                                                             | `GET /quote`                                   | The price of a fax of so many pages, sent without a plan.                            |
+| `quote.get_quote(pages)`                                                             | `GET /quote`                                   | The price of a fax to a number in the US, its territories or Canada, without a plan. |
+| `quote.quote_number(quote_body)`                                                     | `POST /quote`                                  | The price of a fax to the number you name, and whether the plan covers it.           |
 | `draft.get_draft`                                                                    | `GET /draft`                                   | Your draft, the fax you prepare, its documents in the order it sends them.           |
 | `draft.add_document(idempotency_key, new_document)`                                  | `POST /draft/documents`                        | Adds a PDF to the draft, by a link XipFax fetches or by an upload.                   |
 | `draft.complete_document(idempotency_key, document_id)`                              | `POST /draft/documents/{document_id}/complete` | Reads an uploaded PDF back, its pages counted.                                       |
